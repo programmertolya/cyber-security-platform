@@ -8,7 +8,7 @@
 [![.NET](https://img.shields.io/badge/.NET-10.0-purple?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![Ollama](https://img.shields.io/badge/Ollama-DeepSeek--R1-black?logo=ollama&logoColor=white)](https://ollama.com/)
+[![Ollama](https://img.shields.io/badge/Ollama-Qwen_2.5--3B-black?logo=ollama&logoColor=white)](https://ollama.com/)
 
 </div>
 
