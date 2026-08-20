@@ -47,7 +47,8 @@
   docker exec -it cyber_db psql -U admin -d cyber_security_db -f /migrate.sql
 5. Переход на http://localhost:5050, Servers пкм -> register -> Server:
   Name - cyber_security_db, на вкладке Connection -> Host name - db, пароль из файла appsettings.json
-6.Находим таблицу Users(cyber_security_db -> Schemas -> public -> Tables), в окне Query выполняем запрос:
+6.Находим таблицу Users(cyber_security_db -> Schemas -> public -> Tables) пкм -> View/Edit Data
+  -> All Rows, в окне Query выполняем запрос:
  alter table "Users" alter column "CreatedAt" set default NOW()
 
 🌐 Доступ к сервисам
