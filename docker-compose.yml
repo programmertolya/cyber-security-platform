@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # Наша основная база данных
+  db:
+    image: postgres:15-alpine
+    container_name: cyber_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 78tye0G33
+      POSTGRES_DB: cyber_security_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - cyber_network
+
+  # Контейнер с моделью ИИ
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_container
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    # Автоматическое скачивание при старте контейнера
+    command: serve && ollama pull deepseek-r1:1.5b || true
+    networks:
+      - cyber_network
+
+  # Бэкенд на .NET Core
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: azbuka_api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_ENVIRONMENT=Development
+      # Здесь PORT равен 5432, так как внутри сети контейнеры общаются через стандартный порт
+      - DB_CONNECTION_STRING=Host=db;Port=5432;Database=cyber_security_db;Username=admin;Password=78tye0G33
+      - OLLAMA_URL=http://ollama:11434
+    depends_on:
+      - db
+      - ollama
+    networks:
+      - cyber_network
+
+    
+  # frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=/api
+    container_name: react_frontend
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+    networks:
+      - cyber_network
+
+  # Визуальный интерфейс для базы
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: cyber_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - cyber_network
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+
+# Сеть, чтобы контейнеры видели друг друга
+networks:
+  cyber_network:
+    driver: bridge
+
+# Чтобы данные базы и модели не удалялись при перезагрузке
+volumes:
+  db_data:
+  ollama_data:
+  pgadmin_data:

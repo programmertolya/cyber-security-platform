@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/API/CyberSecurity.API.csproj" />
+  <Project Path="src/Application/CyberSecurity.Application.csproj" />
+  <Project Path="src/Domain/CyberSecurity.Domain.csproj" />
+  <Project Path="src/Infrastructure/CyberSecurity.Infrastructure.csproj" />
+</Solution>

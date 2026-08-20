@@ -1,0 +1,29 @@
+# --- Блокируем папки с отчетами ZAP в корне ---
+/*-ZAP-Report*/
+/cve-report/
+backend/Reports/
+
+# --- Блокируем конкретные тяжелые файлы отчетов и лишние скриншоты в корне ---
+/2026-*.html
+/CVE_REPORT.png
+/Безымянный.png
+/памятка.txt
+/infra
+
+# --- Бэкенд и IDE ---
+.vs/
+.vscode/
+**/bin/
+**/obj/
+appsettings.Development.json
+
+# --- Фронтенд (папки зависимостей и сборки) ---
+**/node_modules/
+**/dist/
+.env
+.env.local
+
+# --- Базы данных и контейнеры ---
+db_data/
+ollama_data/
+pgadmin_data/

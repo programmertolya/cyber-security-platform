@@ -1,0 +1,10 @@
+**/.bin
+**/.obj
+**/.git
+**/.vs
+**/.vscode
+out/
+dist/
+node_modules/
+.dockerignore
+Dockerfile
