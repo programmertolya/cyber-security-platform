@@ -35,7 +35,7 @@
 Требования
 Установленный Docker Desktop (с поддержкой Compose v2).
 1. Клонирование
-  git clone git@github.com:ВАШ_АККАУНТ/cyber-security-platform.git
+  git clone git@github.com:programmertolya/cyber-security-platform.git
   cd cyber-security-platform
 2. Запуск контейнеров
   docker compose up -d --build
