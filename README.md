@@ -41,6 +41,14 @@
   docker compose up -d --build
 ⏱️ При первом запуске нужно скачать модель Ollama
   docker exec -it ollama_container ollama pull qwen2.5:3b
+3. Переход в директорию API(cd backend/src/API) и копирование скрипта в контейнер с БД
+  docker cp migrate.sql cyber_db:/migrate.sql
+4. Выполнение скрипта внутри контейнера БД
+  docker exec -it cyber_db psql -U admin -d cyber_security_db -f /migrate.sql
+5. Переход на http://localhost:5050, Servers пкм -> register -> Server:
+  Name - cyber_security_db, на вкладке Connection -> Host name - db, пароль из файла appsettings.json
+6.Находим таблицу Users(cyber_security_db -> Schemas -> public -> Tables), в окне Query выполняем запрос:
+ alter table "Users" alter column "CreatedAt" set default NOW()
 
 🌐 Доступ к сервисам
 После успешного запуска перейдите по адресам:
